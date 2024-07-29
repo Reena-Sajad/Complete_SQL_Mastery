@@ -57,3 +57,14 @@ SELECT *
 FROM customers c, orders o
 WHERE c.customer_id = o.customer_id;
 
+-- 3.7 OUTER JOIN: 2 types left and right
+
+USE sql_store;
+
+SELECT 
+	p.product_id,
+    p.name,
+    oi.quantity
+FROM products p
+LEFT JOIN order_items oi
+	ON p.product_id = oi.product_id; 
