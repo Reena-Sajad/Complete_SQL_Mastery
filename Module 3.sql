@@ -50,3 +50,10 @@ FROM order_items o
 JOIN order_item_notes oin 
 ON o.order_id = oin.order_id 
 AND o.product_id = oin.product_id;
+
+-- 3.6 IMPLICIT JOIN SYNTAX - Doing joins without using join syntax. This metj=hod is not recommended because the
+-- absence of the where clause will result in a cross join 
+SELECT * 
+FROM customers c, orders o
+WHERE c.customer_id = o.customer_id;
+
