@@ -36,5 +36,14 @@ VALUES
 (LAST_INSERT_ID(), 1, 2, 3.45),
 (LAST_INSERT_ID(), 2, 2, 2.23)
 
+-- 4.5 Copying data from one table to another: By using select * from the original table
+-- truncate table - delete table
 
+USE sql_invoicing;
+CREATE TABLE invoices_archive AS
+SELECT i.invoice_id, i.number, c.name, i.invoice_total, i.payment_total, i.invoice_date, i.due_date, i.payment_date
+FROM invoices i
+LEFT JOIN clients c
+ON i.client_id = c.client_id
+WHERE payment_date IS NOT NULL;
 
