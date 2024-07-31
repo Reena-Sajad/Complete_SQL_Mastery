@@ -68,3 +68,75 @@ SELECT
 FROM products p
 LEFT JOIN order_items oi
 	ON p.product_id = oi.product_id; 
+
+-- 3.9 SElf Outer Join
+USE sql_hr;
+
+SELECT e.employee_id, 
+e.first_name, 
+m.first_name AS Manager_name 
+FROM employees e
+LEFT JOIN employees m
+ON e.reports_to = m.employee_id;
+
+-- 3.10 USING clause instead of ON . This clause can only be used if the common cloumn has the 
+-- same name in both tables  
+ USE sql_invoicing;
+ 
+ SELECT 
+ p.date,
+ c.name,
+ p.amount,
+ pm.name
+ FROM clients c 
+ JOIN payments p
+ USING (client_id)
+ JOIN payment_methods pm
+ ON p.payment_method = pm.payment_method_id;
+ 
+ -- 3.11 NATURAL JOIN: 
+ --  with natural join you dont have to specify column name that is common, you just let the 
+ -- database find the common column and join based on that column
+ 
+ -- CROSS JOIN
+ -- Combining every record in ome table with every record in another table. Two types:
+ -- Explicit syntax (CROSS JOIN keyword), implicit syntax (FROM table1, table2)
+ 
+ USE sql_store;
+  SELECT * 
+  FROM shippers 
+  CROSS JOIN products;
+  
+  SELECT *
+  FROM shippers, products;
+ 
+ -- 3.12 UNIONS
+ -- Joins combine columns from multiple tables whereas unions combine rows from multiple tables
+ -- They are essentialy used to combine results of multiple queries. But, the number of columns each query returns
+ -- must be equal for the union to work
+
+ SELECT 
+ customer_id,
+ first_name,
+ points,
+ 'Bronze' AS type
+ FROM sql_store.customers
+ WHERE points < 2000
+ UNION
+  SELECT 
+ customer_id,
+ first_name,
+ points,
+ 'Silver' AS type
+ FROM sql_store.customers
+ WHERE 2000 < points < 3000
+UNION
+ SELECT 
+ customer_id,
+ first_name,
+ points,
+ 'Gold' AS type
+ FROM sql_store.customers
+ WHERE points > 3000
+ ORDER BY first_name;
+ 
