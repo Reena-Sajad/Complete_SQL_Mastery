@@ -25,6 +25,16 @@ VALUES
 ('potatoes', 56, 2.67),
 ('boots', 23, 5.70);
 
--- 4.4 Inserting Hierarchical Rows
+-- 4.4 Inserting Hierarchical Rows: Inserting into multiple tables 
+-- LAST_INSERT_ID()
+
+INSERT INTO orders (customer_id, order_date)
+VALUES (2,'2024-12-12');
+
+INSERT INTO order_items
+VALUES
+(LAST_INSERT_ID(), 1, 2, 3.45),
+(LAST_INSERT_ID(), 2, 2, 2.23)
+
 
 
