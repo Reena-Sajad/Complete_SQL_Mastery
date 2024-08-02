@@ -47,3 +47,11 @@ LEFT JOIN clients c
 ON i.client_id = c.client_id
 WHERE payment_date IS NOT NULL;
 
+-- 4.6 Updating data in tables 
+-- UPDATE, SET key  words
+
+UPDATE invoices_archive
+SET 
+invoice_date = '2020-01-01',
+payment_total = 5
+WHERE invoice_id = 2
