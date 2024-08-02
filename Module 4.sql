@@ -55,3 +55,20 @@ SET
 invoice_date = '2020-01-01',
 payment_total = 5
 WHERE invoice_id = 2
+
+-- 4.7 Updating multiple rows 
+
+UPDATE sql_store.customers 
+SET points = points + 50
+WHERE birth_date < '1990-01-01';
+
+-- 4.8 Using subqueries in updates 
+-- The subquery should be in parenthesis, if the subquery returns a single row, use '='
+-- otherwise use 'IN' 
+
+UPDATE sql_store.orders 
+SET comments = 'Gold Customer!'
+WHERE customer_id IN 
+	(SELECT customer_id 
+	FROM sql_store.customers 
+	WHERE points > 3000);
