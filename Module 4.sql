@@ -72,3 +72,11 @@ WHERE customer_id IN
 	(SELECT customer_id 
 	FROM sql_store.customers 
 	WHERE points > 3000);
+
+-- 4.9 Delete rows
+
+DELETE FROM invoices 
+WHERE invoice_id = 1;
+
+ -- 4.10 Restoring Databases to their original state
+ -- File -> OPen SQL Script -> open the create database file from directory
