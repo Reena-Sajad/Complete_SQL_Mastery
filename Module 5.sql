@@ -33,5 +33,31 @@ invoice_date BETWEEN '2019-07-01' AND '2019-12-31'
  FROM
  sql_invoicing.invoices 
  WHERE 
- invoice_date BETWEEN '2019-01-01' AND '2019-12-31'
+ invoice_date BETWEEN '2019-01-01' AND '2019-12-31';
+ 
+ -- 5.2 GROUP BY  
+ -- The typical order for a query is as follows:
+ -- SELECT
+ -- FROM
+ -- WHERE
+ -- GROUP BY (Groups by acts on columns whereas order by acts on rows)
+ -- ORDER BY (It is very important that group by comes before order by)
+
+SELECT 
+	date,
+	pm.name AS payment_method,
+	SUM(p.amount) AS total_payments
+ FROM sql_invoicing.payments p
+ JOIN sql_invoicing.payment_methods pm
+ ON p.payment_method = pm.payment_method_id
+ GROUP BY p.date, payment_method
+ ORDER BY p.date;
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
  
