@@ -53,6 +53,29 @@ SELECT
  GROUP BY p.date, payment_method
  ORDER BY p.date;
  
+ -- 5.3 HAVING Clause  
+ -- The HAVING clause is used to filter data after using GROUP BY 
+ -- The difference between WHERE and HAVING is with having data is filtered after grouping whereas
+ -- with where clause the data is filtered before grouping
+ --  having clause can have compound search conditions using AND
+ -- Having clause can only reference columns specified by select whereas the where clause can
+ -- specify any column in the data table
+ 
+SELECT 
+	c.customer_id,
+	c.first_name,
+	c.last_name,
+	c.city,
+	c.state,
+	SUM(oi.quantity * oi.unit_price) AS total_amount_spent
+FROM sql_store.customers c
+ JOIN sql_store.orders o USING (customer_id)
+ JOIN sql_store.order_items oi USING (order_id)
+ WHERE state = 'VA'
+ GROUP BY c.customer_id, c.first_name, c.last_name
+ HAVING (total_amount_spent > 100);
+ 
+ 
  
  
 
